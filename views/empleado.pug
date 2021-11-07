@@ -1,0 +1,82 @@
+extends base.pug
+
+block title
+    title Empleado
+
+block container 
+    .container 
+                .col
+                    h1 Formulario
+                    .col
+                        if empleado 
+                            form(action="/empleado/" + empleado[0].idEmp, method="post")
+                                .mb-3 
+                                    label.form-label(for="nombre") Nombre 
+                                    input.form-control(type="text" name="nombre" value=empleado[0].nombre)
+                                .mb-3 
+                                    label.form-label(for="apellido") Apellido
+                                    input.form-control(type="text" name="apellido" value=empleado[0].apellido)
+                                .mb-3 
+                                    label.form-label(for="telefono") Telefono
+                                    input.form-control(type="text" name="telefono" value=empleado[0].telefono)
+                                .mb-3
+                                    label.form-label(for="correo") Correo
+                                    input.form-control(type="text" name="correo" value=empleado[0].correo)
+                                .mb-3
+                                    label.form-label(for="sexo") Sexo
+                                    input.form-control(type="text" name="sexo" value=empleado[0].sexo)
+                                .mb-3
+                                    label.form-label(for="idDep") Departamentos
+                                    select.form-select(name="idDep")
+                                        each e in departamentos
+                                            option(value=e.idDep) #{e.Departamento}
+                                .mb-3 
+                                    button.btn.btn-success  Insertar 
+                        else 
+                            form(action="", method="post")
+                                .mb-3 
+                                    label.form-label(for="nombre") Nombre 
+                                    input.form-control(type="text" name="nombre" value="")
+                                .mb-3 
+                                    label.form-label(for="apellido") Apellido
+                                    input.form-control(type="text" name="apellido")
+                                .mb-3 
+                                    label.form-label(for="telefono") Telefono
+                                    input.form-control(type="text" name="telefono" )
+                                .mb-3
+                                    label.form-label(for="correo") Correo
+                                    input.form-control(type="text" name="correo" )
+                                .mb-3
+                                    label.form-label(for="sexo") Sexo
+                                    input.form-control(type="text" name="sexo")
+                                .mb-3 
+                                    label.form-label(for="idDep") Departamento
+                                    select.form-select(name="idDep")
+                                        each e in departamentos
+                                            option(value=e.idDep) #{e.Departamento}
+                                .mb-3 
+                                    button.btn.btn-success  Insertar 
+                .col
+                    h1 Mostrar Datos
+                    .col   
+                    table.table
+                        thead.thead-dark
+                            tr
+                                th(scope='col') Nombre
+                                th(scope='col') Apellido
+                                th(scope='col') Telefono
+                                th(scope='col') Correo
+                                th(scope='col') Sexo
+                                th(scope='col') Departamento
+                        tbody
+                            each e in empleados
+                                tr 
+                                    td #{e.nombre}
+                                    td #{e.apellido}
+                                    td #{e.telefono}
+                                    td #{e.correo}
+                                    td #{e.sexo}
+                                    td #{e.Departamento}
+                                    td 
+                                        a.m-3(href="/empleado/" + e.idEmp) Editar
+                                        a(href="/empleado/eliminar/" + e.idEmp) Eliminar

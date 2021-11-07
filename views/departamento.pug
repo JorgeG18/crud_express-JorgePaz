@@ -1,0 +1,46 @@
+extends base.pug
+
+block title
+    title departamento
+
+block container 
+    .container 
+                .col
+                    h1 Formulario
+                    .col
+                        if departamento
+                            form(action="/departamento/" + departamento[0].idDep, method="post")
+                                .mb-3 
+                                    label.form-label(for="nombre") Nombre 
+                                    input.form-control(type="text" name="nombre" value=departamento[0].nombre)
+                                .mb-3 
+                                    label.form-label(for="descripcion") Descripcion
+                                    input.form-control(type="text" name="descripcion" value=departamento[0].apellido)
+                                
+                                    button.btn.btn-success  Insertar 
+                        else 
+                            form(action="", method="post")
+                                .mb-3 
+                                    label.form-label(for="nombre") Nombre 
+                                    input.form-control(type="text" name="nombre" )
+                                .mb-3 
+                                    label.form-label(for="descripcion") Descripcion
+                                    input.form-control(type="text" name="descripcion")
+                                .mb-3 
+                                    button.btn.btn-success  Insertar 
+                .col
+                    h1 Mostrar Datos
+                    .col   
+                    table.table
+                        thead.thead-dark
+                            tr
+                                th(scope='col') Nombre
+                                th(scope='col') Descripcion
+                        tbody
+                            each d in departamentos
+                                tr 
+                                    td #{d.nombre}
+                                    td #{d.descripcion}
+                                    td 
+                                        a.m-3(href="/departamento/" + d.idDep) Editar
+                                        a(href="/eliminar/" + d.idDep) Eliminar
